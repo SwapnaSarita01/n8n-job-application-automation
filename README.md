@@ -1,21 +1,56 @@
-# n8n Job Application Automation
+# 🤖 n8n Job Application Automation (Cold Email Engine)
 
-This project automates job applications using n8n.
+An end-to-end **automation system built with n8n** to apply for jobs at scale using **personalized cold emails**, while maintaining **email reputation, error handling, and tracking**.
 
-## Features
-- Reads HR data from Google Sheets
-- Sends personalized emails
-- Handles SMTP errors safely
-- Marks failed emails as Blocked
-- Rate-limited sending with wait nodes
+This project simulates how real-world outreach platforms (like Lemlist, Apollo, Instantly) work — but built **from scratch** using automation and logic.
 
-## Tech Stack
-- n8n
-- Google Sheets API
-- SMTP (Gmail / Outlook)
+---
 
-## How to use
-1. Import workflow JSON into n8n
-2. Configure credentials
-3. Activate schedule trigger
+## 🚀 Why This Project?
 
+Applying manually to hundreds of jobs is:
+- Time-consuming
+- Error-prone
+- Hard to track
+
+This automation solves that by:
+- Sending **controlled, scheduled emails**
+- Handling **failures safely**
+- Tracking **Sent / Blocked / Pending** states
+- Avoiding workflow crashes on invalid emails
+
+---
+
+## 🧠 What This Automation Does
+
+✅ Reads HR contact data from **Google Sheets**  
+✅ Sends **job application emails** automatically  
+✅ Attaches resume from Google Drive  
+✅ Handles SMTP failures without stopping the workflow  
+✅ Marks failed emails as **Blocked**  
+✅ Adds **rate-limiting** to avoid spam flags  
+✅ Runs daily using a **scheduler**  
+
+---
+
+## 📊 Google Sheet Structure
+
+| Column Name | Purpose |
+|------------|--------|
+| Name | HR Name |
+| Email | HR Email |
+| Title | Job Title |
+| Company | Company Name |
+| Status | Pending / Sent / Blocked |
+| Sent Date | Timestamp |
+| Error Reason | SMTP failure reason (if any) |
+
+---
+
+## 📌 Future Improvements
+
+- Email verification before sending
+- AI-generated personalized email content
+- Follow-up email automation (Day 5)
+- Domain-level auto-blocking
+- AWS SES integration for higher volume
