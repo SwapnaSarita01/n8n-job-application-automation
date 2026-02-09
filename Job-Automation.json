@@ -1,0 +1,400 @@
+{
+  "name": "Jon Application",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6f73e6ab-4ac8-443a-8540-ed6a4e097d99",
+      "name": "Schedule Trigger",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1Kv2Jr4Kvw8OFKfMRGU5E_5qa-A9ChVZK2i3ZsodBx00",
+          "mode": "list",
+          "cachedResultName": "HR list",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Kv2Jr4Kvw8OFKfMRGU5E_5qa-A9ChVZK2i3ZsodBx00/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Kv2Jr4Kvw8OFKfMRGU5E_5qa-A9ChVZK2i3ZsodBx00/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Pending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "0f27b3aa-fd06-4028-b30c-559e1cfead29",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleApi": {
+          "id": "XtdmOoULjT6xrKbS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        624,
+        0
+      ],
+      "id": "49ed4bb5-2be6-4380-aec1-debe9a6ed233",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "fromEmail": "swapnakar967@gmail.com",
+        "toEmail": "={{ $json.Email }}",
+        "subject": "=Exploring DevOps / Cloud opportunities at {{ $json.Company }}",
+        "emailFormat": "text",
+        "text": "=Hi {{ $json.Name }},\n\nI hope you’re doing well.\n\nI’m a Cloud & DevOps Engineer with nearly 3 years of experience in AWS, Azure, Kubernetes, Docker, CI/CD pipelines, AI essentials, Python and infrastructure automation using Terraform and CloudFormation.\n\nI’m reaching out to explore any DevOps, Cloud Engineer, or SRE opportunities at {{ $json.Company }} that may align with my background. I’ve attached my resume for your review and would be glad to connect if this is relevant to your current or upcoming needs.\n\nThank you for your time and consideration.\n\nBest regards,\nSwapna",
+        "options": {
+          "appendAttribution": false,
+          "attachments": "resume"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        976,
+        0
+      ],
+      "id": "2c27c6d8-a359-4604-b99e-fb9a27b2efbb",
+      "name": "Send email",
+      "webhookId": "b1ea47ef-b464-4eee-8929-ba0f17f6b75d",
+      "credentials": {
+        "smtp": {
+          "id": "MHfo7SGJ7B70g2GI",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1LOqYoa7R9xFaAmdJZtEVUNo2U4BPIROi",
+          "mode": "list",
+          "cachedResultName": "Swapna_Sarita_DevOPS-Engineer_CV.pdf",
+          "cachedResultUrl": "https://drive.google.com/file/d/1LOqYoa7R9xFaAmdJZtEVUNo2U4BPIROi/view?usp=drivesdk"
+        },
+        "options": {
+          "binaryPropertyName": "resume"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        752,
+        -208
+      ],
+      "id": "c4e6ab06-2e7d-4281-ae41-360045140950",
+      "name": "Download file",
+      "credentials": {
+        "googleApi": {
+          "id": "EYXAr1nUyZqeKH0j",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Kv2Jr4Kvw8OFKfMRGU5E_5qa-A9ChVZK2i3ZsodBx00",
+          "mode": "list",
+          "cachedResultName": "HR list",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Kv2Jr4Kvw8OFKfMRGU5E_5qa-A9ChVZK2i3ZsodBx00/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Kv2Jr4Kvw8OFKfMRGU5E_5qa-A9ChVZK2i3ZsodBx00/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Done",
+            "Sent Date ": "={{ $now }}",
+            "row_number": "={{ $('Get row(s) in sheet').item.json.row_number }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "SNo",
+              "displayName": "SNo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Sent Date ",
+              "displayName": "Sent Date ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1184,
+        0
+      ],
+      "id": "f22f2873-a5e2-48d3-8f4f-f41d99c19e18",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleApi": {
+          "id": "XtdmOoULjT6xrKbS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1107,
+        144
+      ],
+      "id": "0bb581aa-dcc4-4a55-bbbd-1f368b5913c6",
+      "name": "Wait",
+      "webhookId": "59619561-91c0-408c-adce-24693b2e3f69"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "385d2bc0-aeb0-4e57-9d42-e2260fee8fee",
+      "name": "Limit"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send email": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "d32063c1-7544-4ec9-a0be-0fbb78d08eb7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4fa895dfe44a50c06cab4e548c08baaa9d6a4cdd6e58936d38992e4c9af0a528"
+  },
+  "id": "_4eZmfWhIDSasI-3yLqr5",
+  "tags": []
+}
